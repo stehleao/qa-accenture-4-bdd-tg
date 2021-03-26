@@ -1,11 +1,10 @@
 package io.cucumber.stephanie;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import static org.junit.Assert.*;
+
+import org.openqa.selenium.*;
 
 import io.cucumber.java.pt.*;
 import io.cucumber.stephanie.servicos.Configuracao;
@@ -19,7 +18,7 @@ public class CtSteps02{
     if(strUrl.contains("pay.hotmart.com")) {
       Thread.sleep(5000);
 
-      Configuracao.browser.switchTo().frame(Configuracao.browser.findElement(By.xpath(".//div[@id='__layout']//iframe[1]")));
+      Configuracao.browser.switchTo().frame(Configuracao.browser.findElement(By.xpath(".//div[@id='__layout']//iframe")));
 
       WebElement textV = Configuracao.browser.findElement(By.xpath(".//div[@class='product-price']//span"));
       assertEquals("R$ 1.529,00", textV.getText());
@@ -32,6 +31,7 @@ public class CtSteps02{
     } else {
       WebElement value = Configuracao.browser.findElement( By.xpath(".//*[text()='ou R$ 1529,00 à vista']") );
       assertEquals("ou R$ 1529,00 à vista", value.getText());
+      
       WebElement button = Configuracao.browser.findElement( By.xpath("//img[@src='https://static.hotmart.com/img/btn-buy-green.png']" )); 
       assertTrue(button.isDisplayed());
     }
@@ -41,11 +41,14 @@ public class CtSteps02{
 
   @Entao("devo ver as opcoes")
   public void devo_ver_as_opcoes(List<String> data) throws Throwable{
-    for(int i = 0; i < data.size(); i++) {
-      //Configuracao.browser.findElement( By.xpath(".//h6[text()='" + data.get(i) + "']") );
-      System.out.println(data.get(i));
+    
+    List<WebElement> elementsRoot = Configuracao.browser.findElements(By.xpath(".//div[@class='w-dyn-list']//div"));
+    
+    for(int i = 0; i < elementsRoot.size(); ++i) {
+        WebElement item = elementsRoot.get(i).findElement(By.xpath("./div/div/div/h6"));
+        System.out.println(item.getText());
     }
-
+    
     Configuracao.fechar();
   }
 

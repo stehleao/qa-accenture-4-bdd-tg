@@ -1,7 +1,6 @@
 package io.cucumber.stephanie;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import io.cucumber.java.pt.*;
 import io.cucumber.stephanie.servicos.Configuracao;
