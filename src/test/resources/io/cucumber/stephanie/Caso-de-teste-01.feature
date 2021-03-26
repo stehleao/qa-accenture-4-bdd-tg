@@ -1,5 +1,5 @@
 # language: pt
-@ignore
+# @ignore
 Funcionalidade: Visualizar itens
   Estamos criando uma rotina de teste para validar a visualização do elemento manifesto
 
